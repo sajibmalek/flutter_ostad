@@ -1,6 +1,6 @@
 main(){
   var phoneNumber=[
-    '+8801712348381',
+    '+88',
      '01768131685',
      '01768171985',
      '01768111286',
@@ -17,24 +17,33 @@ main(){
   ///
 print('with +88 number');
   for(var i=0; i<=4;i++){
-if(phoneNumber.length==14){
+if(phoneNumber.length==11){
   continue;
 }
     else{
       if(phoneNumber[i].length==14){
-       print(phoneNumber[i]);
+      //  print(phoneNumber[i]);
       }else{
+        if(phoneNumber[i]=='+88'){
+          continue;
+        }
         print('+88${phoneNumber[i]}');
       }
     }
   }
 print('\n');
-  print('without +88 ');
+  print('without +88 //////');
   var i=0;
-  for(i; i<4;i++){
-   if(phoneNumber[i]=='+8801712348381'){
-     phoneNumber[i]='01712348381';
-     print(phoneNumber[i]);
+  for(i; i<5;i++){
+  if(phoneNumber[i]=='+88'){
+
+    continue;
+   
+
    }
+
+
+   print(phoneNumber[i]);
+
   }
 }
