@@ -1,3 +1,4 @@
+# Flutter Asssignment 2
 ●     Implement an AppBar at the top with a title "Photo Gallery".
 
 
@@ -35,3 +36,8 @@
 
 
 ●     Implement a button, such as an IconButton, that when pressed, displays a SnackBar with the message "Photos Uploaded Successfully!".
+# output
+![a1](https://github.com/sajibmalek/flutter_ostad/assets/44054338/a30a020a-0d01-4e83-93fe-510af367b83d)
+![a2](https://github.com/sajibmalek/flutter_ostad/assets/44054338/b71e2a5d-87d6-47d5-8788-46b8b76c41e2)
+![a3](https://github.com/sajibmalek/flutter_ostad/assets/44054338/5cc33b1a-d257-41fc-8fc5-a537aba66c6b)
+
