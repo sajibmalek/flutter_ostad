@@ -1,8 +1,6 @@
 import 'dart:html';
 
-import 'package:assignment1withflutter/Pages/page1.dart';
-import 'package:assignment1withflutter/Pages/page2.dart';
-import 'package:assignment1withflutter/Pages/page3.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -37,98 +35,80 @@ class HomeActivity extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return DefaultTabController(
-      length: 4,
+    return Scaffold(
+      appBar: AppBar(title: Text("Live Test 1"),
+        centerTitle: true,
+        backgroundColor: Colors.green,
+        elevation: 10,
 
+        actions: [
+          Icon(Icons.home,),
+          Icon(Icons.call),
 
-      child: Scaffold(
-        appBar: AppBar(title: Text("My App"),
-bottom:  TabBar(
-//isScrollable: true,
+        ],
 
-  tabs: [
-    Tab(icon: Icon(Icons.home),text: 'Page 1',),
-    Tab(icon: Icon(Icons.home),text: 'Page 2',),
-    Tab(icon: Icon(Icons.home),text: 'Page 3',)
-  ],
-),
-        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.all(0),
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                accountName: Text("Md.Abdul Malek",style: TextStyle(color: Colors.black),),
+                accountEmail: Text("a.malek0317@gmail.com",style: TextStyle(color: Colors.black)),
+                //currentAccountPictureSize: ,
+                currentAccountPicture: Image.network("https://scontent.frjh1-1.fna.fbcdn.net/v/t39.30808-6/348307856_781678086925915_7698815693821733265_n.jpg?_nc_cat=102&cb=99be929b-3346023f&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHK6HfcM7QUcmBR6xKHp7xlIqvSHLo1Bysiq9IcujUHK2GxGeP8QgQb63TPjTNyxtVUMHDBij6ZBVSoYWNtz6S0&_nc_ohc=dmpc-HIOy-wAX8lvmHR&_nc_ht=scontent.frjh1-1.fna&oh=00_AfC_6XE2NcNS01bU7USAyr-tCgF7DyuDeKaldRV5KNRV0w&oe=64827AFD"),
+              ),
 
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: (){
+                snackMessage("Home",context,Colors.green);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.call),
+              title: Text("Call"),
+              onTap: (){
+                snackMessage("Call",context,Colors.cyan);
+              },
+            ),
 
-
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          onTap:(int index) {
-            if(index ==0){
-              //snackMessage("Page 1 ",context,Colors.green);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>page1()));
-            }
-   if(index==1){
-       //snackMessage("Page 2 ",context,Colors.orangeAccent);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>page2()));
-            }
-            if(index==2){
-            //  snackMessage("Page 3 ",context,Colors.purple);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>page3()));
-            }
-            
-          },
-          items: [
-           BottomNavigationBarItem(icon: Icon(Icons.add),label: "Page 1"),
-            BottomNavigationBarItem(icon: Icon(Icons.add),label: "page 2"),
-            BottomNavigationBarItem(icon: Icon(Icons.add),label: "Page 3"),
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-             DrawerHeader(
-               padding: EdgeInsets.all(0),
-               child: UserAccountsDrawerHeader(
-                 decoration: BoxDecoration(
-                   color: Colors.white,
-                   borderRadius: BorderRadius.circular(2),
-                 ),
-                 accountName: Text("Md.Abdul Malek",style: TextStyle(color: Colors.black),),
-                 accountEmail: Text("a.malek0317@gmail.com",style: TextStyle(color: Colors.black)),
-                 //currentAccountPictureSize: ,
-                 currentAccountPicture: Image.network("https://scontent.frjh1-1.fna.fbcdn.net/v/t39.30808-6/348307856_781678086925915_7698815693821733265_n.jpg?_nc_cat=102&cb=99be929b-3346023f&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHK6HfcM7QUcmBR6xKHp7xlIqvSHLo1Bysiq9IcujUHK2GxGeP8QgQb63TPjTNyxtVUMHDBij6ZBVSoYWNtz6S0&_nc_ohc=dmpc-HIOy-wAX8lvmHR&_nc_ht=scontent.frjh1-1.fna&oh=00_AfC_6XE2NcNS01bU7USAyr-tCgF7DyuDeKaldRV5KNRV0w&oe=64827AFD"),
-               ),
-               
-             ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Page 1"),
-                onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=>page1()));
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Page 2"),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>page2()));
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Page 3"),
-                onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>page3()));
-                },
-              ),
-            ],
-          ),
+      ),
+body: Center(
+  child: Column(
+    children: [
+      Image.network("https://media2.giphy.com/media/TFTTO4OWzdwhFBzSUz/giphy.gif?cid=6c09b952bw4g2jvdokzfukhc52hqhs2tc8nwafrd2xrfh09l&ep=v1_stickers_related&rid=giphy.gif&ct=s",width: 200,height: 200,
+      fit: BoxFit.scaleDown,
+      ),
+      Text("Shinchan",style: TextStyle(fontSize: 25),),
+      ElevatedButton(onPressed: (){  snackMessage("you have clicked the button",context,Colors.green);}, child: Text("Click now"),)
+    ],
+  ),
+
+),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: Container(
+      height: 100.0,
+      width: 100.0,
+
+      child: FittedBox(
+        child: FloatingActionButton(onPressed: () {},
+        backgroundColor: Colors.orange,
+          child: TextButton(onPressed: (){},child: Text("FAB",style: TextStyle(color: Colors.white),),),
+
         ),
-    body: TabBarView(
-      children: [
-        page1(),
-        page2(),
-        page3()
-      ],
+      ),
     ),
-        ),
-      );
+    );
   }
 
 }
