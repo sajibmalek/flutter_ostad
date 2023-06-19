@@ -45,6 +45,7 @@ class homePageUi extends State<homePage>{
      ),
     body: Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
           Padding(
