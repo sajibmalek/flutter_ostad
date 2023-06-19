@@ -7,11 +7,7 @@ void main(){
   runApp(app());
 }
 
-class counterData{
 
-  String msg;
-  counterData({required this.msg});
-}
 class app extends StatelessWidget {
   const app({super.key});
 
@@ -96,7 +92,7 @@ Center(
                   }
                   else if(counter==10){
 
-                    Navigator.push(context,MaterialPageRoute(builder: (c)=>const SecondScreen()));
+                    Navigator.push(context,MaterialPageRoute(builder: (c)=>SecondScreen()));
                   }
 
 
