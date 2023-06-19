@@ -44,7 +44,7 @@ class _productListState extends State<productList> {
     plist(name: "product 5", price: 80.0),
     plist(name: "product 6", price: 39.0),
     plist(name: "product 7", price: 29.0),
-     
+
   ];
 
 
