@@ -1,16 +1,21 @@
-# m7livetest
+# Module 7 live test
 
-A new Flutter project.
+  Create a Flutter application that consists of a stateful widget called CounterApp. 
 
-## Getting Started
+•       The CounterApp should display a counter value and two buttons: "Increment" and "Decrement".
 
-This project is a starting point for a Flutter application.
+•       Both buttons should be in a Row and have different sizes (responsive).
 
-A few resources to get you started if this is your first Flutter project:
+•       Press the "Increment" button to increase the counter value by 1 and press the "Decrement" button to decrease the counter value by 1. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+•       If the counter value reaches 5, display a dialog box with the message "Counter value is 5!".
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+•       If the counter value reaches 10, navigate to a new screen called SecondScreen that displays the message "Congratulations! You 
+      reached 10!".
+
+      #output
+      
+![m7lt](https://github.com/sajibmalek/flutter_ostad/assets/44054338/f4121b48-b848-42de-be51-f08f20f8f1a6)
+![m7lt3](https://github.com/sajibmalek/flutter_ostad/assets/44054338/065081e5-aa62-48d6-a83d-d37c27b6908f)
+![m7lt4](https://github.com/sajibmalek/flutter_ostad/assets/44054338/4480c9d2-8bf1-462e-b723-4deb8c86c37d)
+
