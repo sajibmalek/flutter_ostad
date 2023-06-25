@@ -10,8 +10,11 @@ main(){
    @override
    Widget build(BuildContext context) {
      return MaterialApp(
+       theme: ThemeData(
+         primarySwatch: Colors.red,
+       ),
        debugShowCheckedModeBanner: false,
-       title: "Satefull Wigget",
+       title: "Add to cart",
        home: cart_screen(),
      );
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class cart_screen extends StatefulWidget {
     cart_screen({super.key});
@@ -10,11 +11,12 @@ class cart_screen extends StatefulWidget {
 
 class _cart_screenState extends State<cart_screen> {
   int cart=1;
-  int price=200;
-  late int res= price*cart;
+  int price=20;
+  late int total= price*cart;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Cart"),
 
@@ -30,104 +32,121 @@ class _cart_screenState extends State<cart_screen> {
           )
         ],
       ),
-
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 25),
-        child: Column(
-          children: [
-
-            Card(
-          elevation: 4,
-              color: Colors.green,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.lightGreen
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+      body: Center(
+        child: Container(
+          width: 200,
+            height: 400,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: Offset(0, 3)
               ),
-              child: SizedBox(
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Image.network("images/b2.jpg",height: 150,),
 
-                width: 150,
-                height: 150,
-                child: Image.network(
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.jpg/220px-Pizza-3007395.jpg",
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.fill,
                 ),
-              ),
-        ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Neapolitan Pizza",style: TextStyle(
-                fontSize: 24,color: Colors.amber,
-                fontWeight: FontWeight.bold
-              ),),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Neapolitan pizza, or pizza Napoletana, is a type of pizza that originated in Naples, Italy. This style of pizza is prepared with simple and fresh ingredients: a basic dough, raw tomatoes, fresh mozzarella cheese, fresh basil, and olive oil. No fancy toppings are allowed!",style: TextStyle(
-                  fontSize: 14,color: Colors.black,
-                  fontWeight: FontWeight.w200
-              ),),
-            ),
-            Text("Price: 200tk"),
-            Text("Total Price: $res"),
-
-
-              Padding(
-                padding:   EdgeInsets.symmetric(horizontal: 100,vertical: 20),
-
-                  child: Center(
-                    child: Row(
-                      children: [
-                        ElevatedButton(onPressed: (){
-
-                          if(cart==10){
-                            cart==10;
-                          }
-                          else{
-                            cart +=1;
-                            res =price*cart;
-                          }
-
-                          setState(() {
-
-                          });
-                        }, child: Icon(Icons.add,color: Colors.white,),),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("$cart",style: TextStyle(
-                          ),),
-                        ),
-
-                        ElevatedButton(onPressed: (){
-                          if(cart<=1){
-                            cart==1;
-                          }
-                          else{
-                            cart -=1;
-                            res =price*cart;
-                          }
-
-                          setState(() {
-
-                          });
-                        }, child: Center(
-                          child: Text("-",style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),),
-                        )),
-                      ],
-                    ),
+                SizedBox(height: 3,),
+                Text("Bean burger",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 23,
+                ),),
+                SizedBox(height: 3,),
+                Text("A black bean burger would simply be a patty made from beans",style: TextStyle(
+                   fontSize: 16,
+                ),),
+                SizedBox(height: 6,),
+                RatingBar.builder(
+                  initialRating: 3.5,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  itemCount: 5,
+                  itemSize: 16,
+                  itemPadding: EdgeInsets.symmetric(horizontal: 5),
+                  itemBuilder: (context,index)=>(
+                  Icon(Icons.star,color: Colors.red,)
                   ),
+                  onRatingUpdate: (index){},
+                ),
+                SizedBox(height: 6,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("\$ ${price}",style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),),
+                    Icon(Icons.favorite_border,color: Colors.red,size: 28,)
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Total: \$${total}",style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal
+                    ),),
+                   ],
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(onPressed: (){
+                        if(cart>1){
+                          cart -=1;
+                          total= price*cart;
+                          if(mounted){
+                            setState(() {
+                            });
+                          }
+                        }
+                        else{
+                         cart==1;
+
+                        }
+                    }, child:Text("-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.withOpacity(0.9)
+                    ),),
+                    Text("${cart}",style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    ElevatedButton(onPressed: (){
+                        if(cart==10){
+                          cart=10;
+                        }
+                        else{
+                          cart +=1;
+                          total= price*cart;
+                          if(mounted){
+                            setState(() {
+                            });
+                          }
+                        }
+
+                    }, child:Text("+",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13)),style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.withOpacity(0.9)
+                    ),),
+                  ],
                 ),
 
-
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );
