@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 
@@ -10,9 +9,9 @@ class task extends StatefulWidget {
 }
 
 class taskM{
-  String title,decription,time_req;
+  String title,decription,deadline;
   //bool isDone;
-  taskM(this.title,this.decription,this.time_req);
+  taskM(this.title,this.decription,this.deadline);
 }
 
 
@@ -35,7 +34,7 @@ class _taskState extends State<task> {
   inputDialog(context){
     showDialog(
       context: context,
-      barrierDismissible: true, // user must tap button!
+      barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           title:   Text('Add Task'),
@@ -66,12 +65,12 @@ class _taskState extends State<task> {
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: TextFormField(
+
                      controller: _desController,
                         validator: (String ?value){
                           if(value?.trim().isEmpty??true){
                             return "Enter your description";
                           }
-
                           return null;
                         },
                         //  obscureText: true,
@@ -82,9 +81,9 @@ class _taskState extends State<task> {
                           //  helperText: "exmaple@gmail.com"
                           hintText: "Enter your description",
                         ),
-
                       ),
                  ),
+                SizedBox(height: 8,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
@@ -98,7 +97,7 @@ class _taskState extends State<task> {
                     //  obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Dayes Required',
+                      labelText: 'Required Days',
                       //  helperText: "exmaple@gmail.com"
                       hintText: "Enter your Required Days",
                     ),
@@ -120,18 +119,13 @@ class _taskState extends State<task> {
               onPressed: () {
                 if(_formKey.currentState!.validate()){
                   tasklist.add(taskM(_titleController.text.trim(), _desController.text.trim(), _timeReq.text.trim()));
-
-
-
                 if(mounted){
                   setState(() {
                   });
                 }
-
                   _titleController.clear();
                   _desController.clear();
                   _timeReq.clear();
-
                 Navigator.of(context).pop();
                 }
               },
@@ -141,23 +135,56 @@ class _taskState extends State<task> {
       },
     );
   }
-  void deleteModal(context,index){
-    showModalBottomSheet(context: context,
-        builder: (context){
 
+  void deleteModal(context,index){
+    showModalBottomSheet(context: context, builder: (context){
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: 200,
-          height: 200,
-          child:Stack(
-            children: [
-           Text("title ${tasklist[index].title}"),
-              Text("title ${tasklist[index].decription}"),
-              Text("title ${tasklist[index].time_req}"),
-            ],
-          ) ,
-        )
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shadowColor: Colors.green,
+          // color: Color.fromRGBO(33, 191, 115, 1),
+          elevation: 8,
+          child: SizedBox(
+            width: 100,
+            height: 250,
+            child: Stack(
+              children:[
+                Positioned(
+                  left: 0,
+                  top: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text("Task details",style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24
+                        ),),
+
+                        Text("Title: ${tasklist[index].title}"),
+                        Text("Decription: ${tasklist[index].decription}"),
+                        Text("Required time: ${tasklist[index].deadline}"),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(onPressed: (){
+                            tasklist.removeAt(index);
+                            setState(() {
+                            });
+                            Navigator.pop(context);
+
+                          }, child: Text("Delete")),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ]
+
+            ),
+          )
+        ),
       );
     });
   }
@@ -179,13 +206,13 @@ class _taskState extends State<task> {
               elevation: 8,
               child: SizedBox(
                 width: 200,
-                height: 250,
+                height: 200,
                 child: ListTile(
                   onLongPress: (){
-                    deleteModal(context,index);
+                  deleteModal(context, index);
                   },
                   title: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
                     child: Text("Title: ${tasklist[index].title}"),
                   ),
                   subtitle: Column(
@@ -207,7 +234,7 @@ class _taskState extends State<task> {
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.timelapse),
                           ),
-                          Text("Required Time: ${tasklist[index].time_req}"),
+                          Text("Required Time: ${tasklist[index].deadline}"),
                         //  Text("Time")
                         ],
                       )
@@ -223,10 +250,8 @@ class _taskState extends State<task> {
         onPressed: (){
          // snackMessage("mess",context,Colors.green);
           inputDialog(context);
-
         },
         child: Icon(Icons.add),
-
       ),
     );
   }

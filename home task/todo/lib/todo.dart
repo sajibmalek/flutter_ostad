@@ -123,7 +123,7 @@ TextEditingController _decController=TextEditingController();
           IconButton(onPressed: (){
             showDialog<void>(
               context: context,
-              barrierDismissible: true, // user must tap button!
+              barrierDismissible: false, // user must tap button!
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Row(

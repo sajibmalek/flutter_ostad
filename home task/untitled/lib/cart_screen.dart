@@ -21,130 +21,159 @@ class _cart_screenState extends State<cart_screen> {
         title: Text("Cart"),
 
         actions: [
-          GestureDetector(
-            onTap: (){
+          Stack(
+            children: [
+              GestureDetector(
+                onTap: (){
 
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(Icons.shopping_cart),
-            ),
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13,vertical: 10),
+                  child: Icon(Icons.shopping_cart,size: 40,),
+                ),
+              ),
+              Positioned(
+                right: 15,
+                top: 5,
+                child: Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Center(
+                    child: Text("${cart}",style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold
+                    ),),
+                  ),
+                ),
+              )
+            ],
           )
+
         ],
       ),
       body: Center(
-        child: Container(
-          width: 200,
-            height: 400,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 3,
-                blurRadius: 10,
-                offset: Offset(0, 3)
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.network("images/b2.jpg",height: 150,),
-
+        child: Expanded(
+          child: Container(
+            width: 220,
+              height: 450,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: Offset(0, 3)
                 ),
-                SizedBox(height: 3,),
-                Text("Bean burger",style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                ),),
-                SizedBox(height: 3,),
-                Text("A black bean burger would simply be a patty made from beans",style: TextStyle(
-                   fontSize: 16,
-                ),),
-                SizedBox(height: 6,),
-                RatingBar.builder(
-                  initialRating: 3.5,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  itemCount: 5,
-                  itemSize: 16,
-                  itemPadding: EdgeInsets.symmetric(horizontal: 5),
-                  itemBuilder: (context,index)=>(
-                  Icon(Icons.star,color: Colors.red,)
+              ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Image.asset("images/b2.jpg",height: 150,width: 100,),
+
+                    ),
                   ),
-                  onRatingUpdate: (index){},
-                ),
-                SizedBox(height: 6,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("\$ ${price}",style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),),
-                    Icon(Icons.favorite_border,color: Colors.red,size: 28,)
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Total: \$${total}",style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal
-                    ),),
-                   ],
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(onPressed: (){
-                        if(cart>1){
-                          cart -=1;
-                          total= price*cart;
-                          if(mounted){
-                            setState(() {
-                            });
-                          }
-                        }
-                        else{
-                         cart==1;
-
-                        }
-                    }, child:Text("-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.withOpacity(0.9)
-                    ),),
-                    Text("${cart}",style: TextStyle(
+                  SizedBox(height: 3,),
+                  Text("Bean burger",style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23,
+                  ),),
+                  SizedBox(height: 3,),
+                  Text("A black bean burger would simply be a patty made from beans",style: TextStyle(
+                     fontSize: 16,
+                  ),),
+                  SizedBox(height: 6,),
+                  RatingBar.builder(
+                    initialRating: 3.5,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    itemCount: 5,
+                    itemSize: 16,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 5),
+                    itemBuilder: (context,index)=>(
+                    Icon(Icons.star,color: Colors.red,)
+                    ),
+                    onRatingUpdate: (index){},
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("\$ ${price}",style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold
-                    ),),
-                    ElevatedButton(onPressed: (){
-                        if(cart==10){
-                          cart=10;
-                        }
-                        else{
-                          cart +=1;
-                          total= price*cart;
-                          if(mounted){
-                            setState(() {
-                            });
+                      ),),
+                      Icon(Icons.favorite_border,color: Colors.red,size: 28,)
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Total: \$${total}",style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal
+                      ),),
+                     ],
+                  ),
+                  SizedBox(height: 15,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(onPressed: (){
+                          if(cart>1){
+                            cart -=1;
+                            total= price*cart;
+                            if(mounted){
+                              setState(() {
+                              });
+                            }
                           }
-                        }
+                          else{
+                           cart==1;
 
-                    }, child:Text("+",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13)),style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.withOpacity(0.9)
-                    ),),
-                  ],
-                ),
+                          }
+                      }, child:Text("-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.withOpacity(0.9)
+                      ),),
+                      Text("${cart}",style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),),
+                      ElevatedButton(onPressed: (){
+                          if(cart==10){
+                            cart=10;
+                          }
+                          else{
+                            cart +=1;
+                            total= price*cart;
+                            if(mounted){
+                              setState(() {
+                              });
+                            }
+                          }
 
-              ],
+                      }, child:Text("+",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13)),style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.withOpacity(0.9)
+                      ),),
+                    ],
+                  ),
+
+                ],
+              ),
             ),
           ),
         ),
