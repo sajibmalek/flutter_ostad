@@ -28,7 +28,9 @@
 
 
 ●     Ensure that the parent screen updates automatically with the modified task details.
+
 #output
+
 ![t1](https://github.com/sajibmalek/flutter_ostad/assets/44054338/1115b6be-ff10-4042-a6bf-f244ac04f1d2)
 ![t2](https://github.com/sajibmalek/flutter_ostad/assets/44054338/f09be625-72a0-42dc-8f53-791d7aefb348)
 ![t3](https://github.com/sajibmalek/flutter_ostad/assets/44054338/782024ef-d8af-4e1b-8f83-16435ec3c01c)
