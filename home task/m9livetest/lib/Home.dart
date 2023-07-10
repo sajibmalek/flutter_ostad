@@ -82,7 +82,7 @@ class _RecipeListPageState extends State<RecipeListPage> {
           final recipe = recipes[index];
           return ListTile(
             leading: Image.network("https://images.immediate.co.uk/production/volatile/sites/30/2021/11/july-collection-hero-image-88db29f.jpg?webp=true&quality=90&resize=620%2C563",
-              ),
+              width: 100,height: 100,),
             title: Text(recipe.title),
             subtitle: Text(recipe.description),
           );
