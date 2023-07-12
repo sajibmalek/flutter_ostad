@@ -1,16 +1,18 @@
-# module9assignment
+# Module 9 Assignment
+# Task: Create a simple weather app that fetches and displays the current weather conditions for a user's location.
 
-A new Flutter project.
+# Requirements
 
-## Getting Started
+The app should display the user's current location and the current weather conditions, including the temperature and weather description (e.g. sunny, cloudy, etc.) with a descriptive image of the weather.
 
-This project is a starting point for a Flutter application.
+The app shows a loading indicator when data is being fetched from the api.
 
-A few resources to get you started if this is your first Flutter project:
+The app should display an error message if there is a problem fetching the weather data.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You may use a custom font for the temperature and weather description.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+You can use the OpenWeatherMap API or any free weather API to fetch weather data.
+
+#output
+
+![wa](https://github.com/sajibmalek/flutter_ostad/assets/44054338/5c0490f3-0292-4c52-b741-8ee03a8c554e)
