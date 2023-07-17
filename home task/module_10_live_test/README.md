@@ -1,16 +1,10 @@
-# module_10_live_test
+# Module 10 Live Test (news feed)
+Question:
+ Create a news feed that adjusts its layout based on the device's orientation. The feed should display multiple news articles thumbnail images in a list format.
 
-A new Flutter project.
+#output:
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+![n1](https://github.com/sajibmalek/flutter_ostad/assets/44054338/68ffc958-6069-4afc-acfb-ee9659ebd1a9)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![n3](https://github.com/sajibmalek/flutter_ostad/assets/44054338/835d4508-afcf-4a30-a573-0ac5892c81f7)
