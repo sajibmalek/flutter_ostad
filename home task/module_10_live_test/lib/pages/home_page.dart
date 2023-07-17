@@ -11,7 +11,7 @@ class home extends StatelessWidget {
     var _isPortrait= MediaQuery.of(context).orientation==Orientation.portrait;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Module 10 live test"),
+        title: Text("News feed"),
 
       ),
       body: _isPortrait?PortraitPage():LandscapePage(),
