@@ -1,0 +1,24 @@
+ import 'package:aspect_ratio_assignment/widgets/portrait_page.dart';
+import 'package:flutter/material.dart';
+
+import 'landscape _page.dart';
+
+
+
+
+
+class ChangeAspectRatio extends StatelessWidget {
+   ChangeAspectRatio({super.key});
+//bool _isPortrait=false;
+
+  @override
+  Widget build(BuildContext context) {
+     var _isPortrait= MediaQuery.of(context).orientation==Orientation.portrait;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
+      ),
+      body: _isPortrait?PortraitPage():LandscapePage(),
+    );
+  }
+}

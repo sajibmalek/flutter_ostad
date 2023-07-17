@@ -1,40 +1,48 @@
 {
     "recipes": [
       {
-        "img":"",
+        "img":"https://assets.bonappetit.com/photos/5a6f48f94f860a026c60fd71/1:1/w_5111,h_5111,c_limit/pasta-carbonara.jpg",
         "title": "Pasta Carbonara",
         "description": "Creamy pasta dish with bacon and cheese.",
         "ingredients": ["spaghetti", "bacon", "egg", "cheese"]
       },
       {
+        "img":"https://www.foodnetwork.com/content/dam/images/food/fullset/2003/9/22/0/tm1a35_caprese_salad.jpg",
         "title": "Caprese Salad",
         "description": "Simple and refreshing salad with tomatoes, mozzarella, and basil.",
         "ingredients": ["tomatoes", "mozzarella", "basil"]
       },
       {
+        "img":"https://www.wellplated.com/wp-content/uploads/2020/12/Peanut-Butter-Banana-Smoothie-recipe.jpg",
         "title": "Banana Smoothie",
         "description": "Healthy and creamy smoothie with bananas and milk.",
         "ingredients": ["bananas", "milk"]
       },
       {
+        "img":"https://natashaskitchen.com/wp-content/uploads/2018/08/Chicken-Stir-Fry-1-1.jpg",
         "title": "Chicken Stir-Fry",
         "description": "Quick and flavorful stir-fried chicken with vegetables.",
         "ingredients": ["chicken breast", "broccoli", "carrot", "soy sauce"]
       },
       {
+        
+        "img":"https://www.foodiecrush.com/wp-content/uploads/2019/05/Grilled-Salmon-foodiecrush.com-023-683x1024.jpg",
         "title": "Grilled Salmon",
         "description": "Delicious grilled salmon with lemon and herbs.",
         "ingredients": ["salmon fillet", "lemon", "olive oil", "dill"]
       },
       {
+        "img":"https://ichef.bbci.co.uk/food/ic/food_16x9_1600/recipes/vegetablecurry_80763_16x9.jpg",
         "title": "Vegetable Curry",
         "description": "Spicy and aromatic vegetable curry.",
         "ingredients": ["mixed vegetables", "coconut milk", "curry powder"]
       },
       {
+        "img":"https://img.taste.com.au/Ul5yhrEV/w643-h428-cfill-q90/taste/2016/11/berry-parfaits-32942-1.jpeg",
         "title": "Berry Parfait",
         "description": "Layered dessert with fresh berries and yogurt.",
         "ingredients": ["berries", "yogurt", "granola"]
       }
+       
     ]
   }

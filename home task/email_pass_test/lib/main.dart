@@ -7,6 +7,8 @@ void main(){
 }
 class app extends StatelessWidget{
   bool isSwtiched=false;
+
+    app({super.key});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +18,7 @@ class app extends StatelessWidget{
       theme: ThemeClass.lightTheme,
       darkTheme:  ThemeClass.darkTheme,
       title: "Email and Password Validation",
-      home: emailPass(),
+      home: const emailPass(),
     );
   }
 

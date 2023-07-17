@@ -61,13 +61,16 @@ class _RecipeListPageState extends State<RecipeListPage> {
       }
     ''';
 
-    Map<String, dynamic> json = jsonDecode(jsonText);
+    print(jsonText);
+     Map<String, dynamic> json = jsonDecode(jsonText);
 
-    List<dynamic> recipeList = json['recipes'];
+     List<dynamic> recipeList = json['recipes'];
 
     setState(() {
       recipes = recipeList.map((item) => Recipe.fromJson(item)).toList();
     });
+
+    print(recipes);
   }
 
   @override
@@ -81,8 +84,6 @@ class _RecipeListPageState extends State<RecipeListPage> {
         itemBuilder: (BuildContext context, int index) {
           final recipe = recipes[index];
           return ListTile(
-            leading: Image.network("https://images.immediate.co.uk/production/volatile/sites/30/2021/11/july-collection-hero-image-88db29f.jpg?webp=true&quality=90&resize=620%2C563",
-              width: 100,height: 100,),
             title: Text(recipe.title),
             subtitle: Text(recipe.description),
           );

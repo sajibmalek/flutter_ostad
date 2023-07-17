@@ -22,23 +22,23 @@ final _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Product> products=[];
-
+  final String Base_url="https://crud.teamrabbil.com/api/v1/";
   @override
   void initState() {
     super.initState();
     getProduct();
   }
 
+
   void getProduct() async{
     inProgress=true;
     setState(() {
     });
-    const String url="https://crud.teamrabbil.com/api/v1/ReadProduct";
-    Response response= await get(Uri.parse(url));
+    Response response= await get(Uri.parse("$Base_url/ReadProduct"));
     // Response response=   get(Uri.parse(url)) as Response;
     final Map<String,dynamic> decodedResponse =jsonDecode(response.body);
     if(response.statusCode==200 && decodedResponse['status']=="success"){
-
+      products.clear();
       for(var value in decodedResponse['data'] ){
         products.add(Product.toJson(value));
       }
@@ -48,8 +48,28 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void deleteProduct(String id) async{
+    inProgress=true;
+    setState(() {
+    });
+    Response response= await get(Uri.parse("$Base_url/DeleteProduct/$id"));
+   dynamic decodeBody= jsonEncode(response.body);
+    if(response.statusCode==200 && decodeBody['status']=="success"){
+      getProduct();
+    }
+    else{
+      inProgress=false;
+      setState(() {
+      });
+    }
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
       title: Text("CRUD App"),
@@ -123,13 +143,19 @@ void actionDialog(context){
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
+           ListTile(
+            onTap: (){
+
+            },
             leading: Icon(Icons.edit_note),
             title: Text("Edit"),
           ),
            const Divider(height: 2,thickness: 2,),
        //   const Spacer(),
           ListTile(
+            onTap: (){
+
+            },
             leading: Icon(Icons.delete_forever),
             title: Text("Delete"),
           ),
