@@ -1,16 +1,10 @@
-# module_10_assignment
+# Module 10 Assignment
 
-A new Flutter project.
+Create the following screen which rearranges its widgets while changing orientation.
 
-## Getting Started
+#output
 
-This project is a starting point for a Flutter application.
+![m10as](https://github.com/sajibmalek/flutter_ostad/assets/44054338/2d25b6fc-cd32-4144-acdc-8708f433afd6)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![m10a2s](https://github.com/sajibmalek/flutter_ostad/assets/44054338/eee21f07-5798-4cbc-b1df-75044a18cd1c)
