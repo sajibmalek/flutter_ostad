@@ -1,9 +1,9 @@
 import 'package:aspect_ratio_assignment/constant/string_const.dart';
-import 'package:aspect_ratio_assignment/widgets/circuler_image.dart';
 import 'package:aspect_ratio_assignment/widgets/description_text_widget.dart';
 import 'package:aspect_ratio_assignment/widgets/title_text_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'circuler_image_portait.dart';
 import 'grid_view_widget.dart';
 
 class PortraitPage extends StatelessWidget {
