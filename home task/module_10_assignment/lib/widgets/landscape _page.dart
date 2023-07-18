@@ -50,8 +50,8 @@ class LandscapePage extends StatelessWidget {
                                   mainAxisSpacing: 12,
                                   crossAxisSpacing: 12,
                                   mainAxisExtent: 150),
-                          itemBuilder: (context, index) => const GridViewImage(
-                              img: 'assets/img/profile.jpg'),
+                          itemBuilder: (context, index) =>   GridViewImage(
+                              img:"asstes/img/profile.jpg" ),
                         )),
                   ],
                 ),
