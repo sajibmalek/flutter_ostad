@@ -19,6 +19,7 @@ class AppString{
  // Join with us
 static const String join_us="Join With Us";
   static const String enter_password ="Enter your password";
+ static const String enter_password_new ="Enter your new password";
  static const String first_name="Enter your first name";
  static const String last_name ="Enter your last name";
  static const String enter_email="Enter your email";

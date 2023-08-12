@@ -9,23 +9,23 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Card(
-            elevation: 3,
-            child: Column(
-              children: [
-              Text('$number',style: const TextStyle(
-                      fontSize: 18,fontWeight: FontWeight.bold
-                  ),),
-                Text(title,style: const TextStyle(
-                      fontSize: 16,
-                  ),)
-              ],
-            ),
-          ),
+    return Center(
+      child: Card(
+        elevation: 2,
+        child: Column(
+          children: [
+          Text('$number',style: const TextStyle(
+                  fontSize: 18,fontWeight: FontWeight.bold
+              ),),
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Text(title,style: const TextStyle(
+                    fontSize: 16,
+                ),),
+            )
+          ],
         ),
-      );
+      ),
+    );
   }
 }

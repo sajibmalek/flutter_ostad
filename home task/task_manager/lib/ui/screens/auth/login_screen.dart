@@ -4,6 +4,7 @@ import 'package:task_manager/ui/data/models/network_response.dart';
 import 'package:task_manager/ui/data/services/ApiUrl.dart';
 import 'package:task_manager/ui/data/services/network_caller.dart';
 import 'package:task_manager/ui/screens/auth/auth_utility.dart';
+import 'package:task_manager/ui/screens/auth/verify_screen.dart';
 import 'package:task_manager/ui/screens/set_password.dart';
 import 'package:task_manager/ui/screens/sign_up_screen.dart';
 import 'package:task_manager/ui/utility/assets_utility/assets_utility.dart';
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final NetworkResponse response= await NetWorkCaller().postRequest(ApiUrl.login,<String,dynamic>{
       "email":_emailController.text.toString().trim(),
       "password":_passwordController.text.toString()
-    });
+    },isLogin: true);
     _isLoginProgress=false;
     if(mounted){
       setState(() {});
@@ -201,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     bottom: 12,
                   ),
                   child: TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SetPasswordScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyScreen()));
                   },
                     child: Text(
                       AppString.forgotText,

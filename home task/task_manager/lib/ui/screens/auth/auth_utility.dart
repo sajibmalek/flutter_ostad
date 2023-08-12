@@ -14,6 +14,12 @@ static LogInModel userInfo=LogInModel();
      return LogInModel.fromJson(jsonDecode(value));
   }
 
+  static Future<void> updateUserInfo(Data data) async {
+    SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+    userInfo.data = data;
+    await sharedPrefs.setString('user-info', jsonEncode(userInfo.toJson()));
+  }
+
   static Future<void> loginPref(LogInModel logInModel) async{
     SharedPreferences sharedpref= await SharedPreferences.getInstance();
     await sharedpref.setString('user-info', jsonEncode( logInModel.toJson()));

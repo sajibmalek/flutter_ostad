@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:task_manager/app.dart';
 import 'package:task_manager/ui/data/models/network_response.dart';
 import 'package:task_manager/ui/screens/auth/auth_utility.dart';
 import 'package:task_manager/ui/screens/auth/login_screen.dart';
@@ -18,10 +19,10 @@ class NetWorkCaller{
         return NetworkResponse(true,response.statusCode, jsonDecode(response.body));
       }
       else if(response.statusCode==401){
-       //   gotoLogIn(context);
+          gotoLogIn( );
       }
       else if(response.statusCode==501){
-       //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Check your internet connection")));
+          ScaffoldMessenger.of(TaskManager.globalKey.currentContext!).showSnackBar(const SnackBar(content: Text("Check your internet connection")));
         log(response.statusCode.toString());
       }
       else {
@@ -34,7 +35,7 @@ class NetWorkCaller{
   }
 
   Future<NetworkResponse> postRequest(
-      String url, Map<String,dynamic>? body) async {
+      String url, Map<String,dynamic>? body,{bool isLogin=false}) async {
     try {
       Response response = await post(Uri.parse(url),
           headers: {
@@ -53,7 +54,9 @@ class NetWorkCaller{
         return NetworkResponse(
             true, response.statusCode, jsonDecode(response.body));
       } else if (response.statusCode == 401) {
-       // gotoLogIn(context);
+        if (isLogin) {
+          gotoLogIn();
+        }
       } else {
         return NetworkResponse(false, response.statusCode, null);
       }
@@ -63,9 +66,12 @@ class NetWorkCaller{
     return NetworkResponse(false, -1, null);
   }
 
-  void gotoLogIn(context) async{
+  void gotoLogIn( ) async{
     await AuthUtility.logOutPref();
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginScreen()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        TaskManager.globalKey.currentContext!,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        (route) => false);
   }
 
 }

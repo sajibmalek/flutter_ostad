@@ -1,26 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/data/services/ApiUrl.dart';
+import 'package:task_manager/ui/data/services/network_caller.dart';
 import 'package:task_manager/ui/screens/sign_up_screen.dart';
 
 import '../../widgets/reusable_background.dart';
+import '../data/models/network_response.dart';
 import '../utility/assets_utility/string_utility.dart';
+import 'auth/login_screen.dart';
 
 class SetPasswordScreen extends StatefulWidget {
-  const SetPasswordScreen({super.key});
+  final String email, otp;
+  const SetPasswordScreen({super.key, required this.email, required this.otp,});
 
   @override
   State<SetPasswordScreen> createState() => _SetPasswordScreenState();
 }
 
-final _setPasswordController=TextEditingController();
-final _setPasswordConfirmController=TextEditingController();
 final _setPasswordKey= GlobalKey<FormState>();
 
 class _SetPasswordScreenState extends State<SetPasswordScreen> {
+
+  final TextEditingController _passwordTEController = TextEditingController();
+  final TextEditingController _confirmPasswordTEController =
+  TextEditingController();
+  bool _setPasswordInProgress = false;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<void> resetPassword() async {
+    _setPasswordInProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+
+    final Map<String, dynamic> requestBody = {
+      "email": widget.email,
+      "OTP": widget.otp,
+      "password": _passwordTEController.text
+    };
+
+    final NetworkResponse response =
+    await NetWorkCaller().postRequest(ApiUrl.resetPassword, requestBody);
+    _setPasswordInProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+    if (response.isSuccess) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Password reset successful!')));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                (route) => false);
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Reset password has been failed!')));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
       body: Stack(
-
         children: [
           const Expanded( flex:1, child: AppBackGround()),
           SafeArea(
@@ -62,15 +106,15 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                           if (value?.trim().isEmpty ?? true) {
                             return "Enter your password";
                           }
-                          if (value?.trim().length!=6) {
-                            return "Enter the minimum 6 digits";
-                          }
+                          // if (value?.trim().length!=6) {
+                          //   return "Enter the minimum 6 digits";
+                          // }
                           if (mounted) {
                             setState(() {});
                           }
                           return null;
                         },
-                        controller: _setPasswordController,
+                        controller: _passwordTEController,
                         decoration: InputDecoration(
 
                             label: const Text("Password"),
@@ -101,15 +145,15 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                           if (value?.trim().isEmpty ?? true ) {
                             return   "Enter the minimum 6 digits";
                           }
-                          if (value?.trim().toString()!=_setPasswordController.text) {
-                            return "Password are not same.";
-                          }
+                          // if (value?.trim().toString()!=_passwordTEController.text) {
+                          //   return "Password are not same.";
+                          // }
                           if (mounted) {
                             setState(() {});
                           }
                           return null;
                         },
-                        controller: _setPasswordConfirmController,
+                        controller: _confirmPasswordTEController,
                         decoration: InputDecoration(
                           //contentPadding:EdgeInsets.only(),
                           // hintText: "exmaple@gmail.com",
@@ -135,13 +179,13 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                       splashColor:Colors.indigo,
                       onTap: () {
                         if(_setPasswordKey.currentState!.validate()){
-                          print(_setPasswordController.text);
-                          print(_setPasswordConfirmController.text);
+                        }
+                        resetPassword();
                           if(mounted){
                             setState(() {
                             });
                           }
-                        }
+
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 68, right: 40),

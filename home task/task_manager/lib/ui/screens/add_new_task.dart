@@ -30,7 +30,7 @@ class _AddNewTaskState extends State<AddNewTask> {
     final NetworkResponse response=await NetWorkCaller().postRequest(ApiUrl.createTask, <String,dynamic>{
       "title":_titleController.text.trim(),
       "description":_descriptionController.text.trim(),
-      "status":"Inprogress"
+      "status":"New"
     }) ;
     if(response.isSuccess){
       //_isnewTaksProgress=false;

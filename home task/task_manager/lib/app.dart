@@ -11,12 +11,19 @@ import 'package:task_manager/ui/screens/update_profile.dart';
 
 import 'ui/screens/auth/login_screen.dart';
 
-class TaskManager extends StatelessWidget {
+class TaskManager extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey= GlobalKey<NavigatorState>();
   const TaskManager({super.key});
 
   @override
+  State<TaskManager> createState() => _TaskManagerState();
+}
+
+class _TaskManagerState extends State<TaskManager> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: TaskManager.globalKey,
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid:false,
       title: 'Task Manager',
@@ -32,7 +39,7 @@ class TaskManager extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5)))),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode:ThemeMode.system,
-      home: const SplashScreen(),
+      home: const SplashScreen()
     );
   }
 }

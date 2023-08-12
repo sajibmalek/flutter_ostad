@@ -1,26 +1,27 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:task_manager/ui/data/models/task_list_model.dart';
 
 class UserTaskList extends StatelessWidget {
-  const UserTaskList({
-    super.key, required this.data,
-  });
-final TaskData data;
+
+//final TaskData data;
+TaskListModel taskListModel=TaskListModel();
+TaskData? taskData;
+
+  UserTaskList({super.key});
   @override
   Widget build(BuildContext context) {
     return  ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 20,
+        itemCount: taskListModel.data?.length??0,
         itemBuilder: (context, index) {
 
             ListTile(
               title:   Padding(
-                padding: EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: Text(data.title??"Unknown"),
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(taskData?.title??"Unknown"),
                 ),
               ),
               subtitle: Column(
@@ -28,22 +29,22 @@ final TaskData data;
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                     Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Text(data.description??""),
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(taskData?.description??""),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Text(data.createdDate??""),
+                    child: Text(taskData?.createdDate??""),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                         Padding(
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: Chip(
                           label: Text(
-                           data.status??"New",
-                            style: TextStyle(color: Colors.white),
+                           taskData?.status??"New",
+                            style: const TextStyle(color: Colors.white),
                           ),
                           backgroundColor: Colors.blue,
                         ),
