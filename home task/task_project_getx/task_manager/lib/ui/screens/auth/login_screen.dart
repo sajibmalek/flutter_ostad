@@ -1,247 +1,156 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/data/models/login_response.dart';
-import 'package:task_manager/ui/data/models/network_response.dart';
-import 'package:task_manager/ui/data/services/ApiUrl.dart';
-import 'package:task_manager/ui/data/services/network_caller.dart';
-import 'package:task_manager/ui/screens/auth/auth_utility.dart';
-import 'package:task_manager/ui/screens/auth/verify_screen.dart';
-import 'package:task_manager/ui/screens/set_password.dart';
-import 'package:task_manager/ui/screens/sign_up_screen.dart';
-import 'package:task_manager/ui/utility/assets_utility/assets_utility.dart';
-import 'package:task_manager/ui/utility/assets_utility/string_utility.dart';
-import 'package:task_manager/widgets/reusable_background.dart';
-import 'package:task_manager/widgets/reusable_text_filed_form.dart';
+import 'package:get/get.dart';
+import 'package:task_manager/ui/screens/auth/signup_screen.dart';
+import 'package:task_manager/ui/screens/bottom_nav_base_screen.dart';
+import 'package:task_manager/ui/screens/auth/email_verification_screen.dart';
+import 'package:task_manager/ui/widgets/screen_background.dart';
+import '../../state_managers_controller/login_controller.dart';
+import '../../utility/string_utility.dart';
 
-import '../bottom_nav_screen.dart';
+class LoginScreen extends StatelessWidget {
+  LoginScreen({Key? key}) : super(key: key);
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final TextEditingController _emailTEController = TextEditingController();
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  final TextEditingController _passwordTEController = TextEditingController();
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
-const String _validMail =
-    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final GlobalKey<FormState> _loginForm= GlobalKey<FormState>();
-  bool _isLoginProgress=false;
-
-  Future<void> login() async{
-    _isLoginProgress=true;
-    if(mounted){
-      setState(() {});
-    }
-    final NetworkResponse response= await NetWorkCaller().postRequest(ApiUrl.login,<String,dynamic>{
-      "email":_emailController.text.toString().trim(),
-      "password":_passwordController.text.toString()
-    },isLogin: true);
-    _isLoginProgress=false;
-    if(mounted){
-      setState(() {});
-    }
-    if (response.isSuccess) {
-      LogInModel logInModel= LogInModel.fromJson(response.body!);
-      await AuthUtility.loginPref(logInModel);
-      _emailController.clear();
-      _passwordController.clear();
-      if (mounted) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomNavScreen()),
-            (route) => false);
-      }
-    }
-
-
-    else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Center(
-          child: Text("Incorrect email or password"),
-        )));
-      }
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const AppBackGround(),
-          Form(
-            key: _loginForm,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 64, right: 90),
-                  child: const Text(
-                    AppString.loginTopText,
-                    style: TextStyle(
-                      fontSize: 28,
+        body: SafeArea(
+      child: ScreenBackground(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 64,
+                  ),
+                  Text(
+                    'Get Started With',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    controller: _emailTEController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      hintText: 'Email',
+                      labelText: 'Email',
                     ),
-                  ),
-                ),
-                Container(
-
-                  width: 310,
-                  margin:
-                   const   EdgeInsets.only(top: 20, left: 64, right: 35, bottom: 15),
-                  child: TextFormField(
                     validator: (String? value) {
-                      if (value?.trim().isEmpty ?? true) {
-                        return "Enter your email";
-                      }
-                      if (!RegExp(_validMail).hasMatch(value.toString())) {
-                        return "Enter the valid email";
-                      }
-                      if (mounted) {
-                        setState(() {});
+                      if (value?.isEmpty ?? true) {
+                        return AppString.enter_email;
                       }
                       return null;
                     },
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        //contentPadding:EdgeInsets.only(),
-                        // hintText: "exmaple@gmail.com",
-                        label: const Text("Email"),
-                        prefixIconColor: Colors.green,
-                        hintText: "exmaple@gmail.com",
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.email,
-                            size: 20,
-                          ),
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.green,
-                            ),
-                            borderRadius: BorderRadius.circular(5))),
                   ),
-                ),
-                Container(
-                  width: 310,
-                  margin: const EdgeInsets.only(left: 64, right: 35, bottom: 15),
-                  child: TextFormField(
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  TextFormField(
+                    controller: _passwordTEController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.password),
+                      hintText: 'Password',
+                      labelText: 'Password',
+                    ),
                     validator: (String? value) {
-                      if (value?.trim().isEmpty ?? true) {
-                        return "Enter your password";
-                      }
-                      // if (value?.length != 6) {
-                      //   return "Enter the minimum 6 password";
-                      // }
-                      if (mounted) {
-                        setState(() {});
+                      if (value?.isEmpty ?? true) {
+                        return AppString.enter_password;
                       }
                       return null;
                     },
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                        //contentPadding:EdgeInsets.only(),
-                        // hintText: "exmaple@gmail.com",
-                        label: const Text("Password"),
-                        prefixIconColor: Colors.green,
-                        hintText: "********",
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.password,
-                            size: 20,
-                          ),
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.green,
-                            ),
-                            borderRadius: BorderRadius.circular(5))),
                   ),
-                ),
-                Visibility(
-                  visible: _isLoginProgress==false,
-                  replacement: const Center(child: CircularProgressIndicator(),),
-                  child: InkWell(
-                    splashColor:Colors.indigo,
-                    onTap: () {
-                      if(!_loginForm.currentState!.validate()){
-                        return;
-                      }
-                      login();
-                      if(mounted){
-                        setState(() {
-                        });
-                      }
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 68, right: 40),
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(5)),
-                      width: 310,
-                      height: 40,
-                      child: const Center(
-                        child: Icon(
-                          Icons.navigate_next_rounded,
-                          color: Colors.white,
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GetBuilder<LoginController>(builder: (loginController) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: Visibility(
+                        visible: loginController.loginInProgress == false,
+                        replacement: const Center(
+                          child: CircularProgressIndicator(),
                         ),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              loginController
+                                  .login(_emailTEController.text.trim(),
+                                      _passwordTEController.text)
+                                  .then((value) {
+                                if (value) {
+                                  Get.snackbar(
+                                    'Login Success',
+                                    'User login successful!',
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                    borderRadius: 10,
+                                  );
+                                  Get.offAll(() => BottomNavBaseScreen());
+                                } else {
+                                  Get.snackbar(
+                                    'Login Failed',
+                                    'Incorrect email or password',
+                                    backgroundColor: Colors.red,
+                                    colorText: Colors.white,
+                                    borderRadius: 10,
+                                  );
+                                }
+                              });
+                            },
+                            child: const Icon(Icons.arrow_forward_ios)),
+                      ),
+                    );
+                  }),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(() => EmailVerificationScreen());
+                      },
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.grey),
                       ),
                     ),
                   ),
-                ),
-                  Padding(
-                  padding: EdgeInsets.only(
-                    top: 30,
-                    bottom: 12,
-                  ),
-                  child: TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyScreen()));
-                  },
-                    child: Text(
-                      AppString.forgotText,
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal),
-                    ),
-                  ),
-                ),
                   Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 12, right: 5),
-                      child: Text(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
                         AppString.dont_account,
                         style: TextStyle(
-                            fontSize: 11, fontWeight: FontWeight.normal),
+                            fontWeight: FontWeight.w500, letterSpacing: 0.5),
                       ),
-                    ),
-                      Padding(
-                      padding:   EdgeInsets.only(bottom: 12, right: 1),
-                      child: TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
-                      }, child: Text(
-                        AppString.signUp,
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green),
-                      ),)
-                    ),
-                  ],
-                )
-              ],
+                      TextButton(
+                          onPressed: () {
+                            Get.to(() => SignUpScreen());
+                          },
+                          child: const Text((AppString.signUp))),
+                    ],
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+          ),
+        ),
       ),
-    );
+    ));
   }
 }

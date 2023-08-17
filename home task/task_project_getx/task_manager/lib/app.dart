@@ -1,45 +1,109 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/add_new_task.dart';
-import 'package:task_manager/ui/screens/bottom_nav_screen.dart';
-import 'package:task_manager/ui/screens/bottom_nav_screens/new_task_nav_screen.dart';
-import 'package:task_manager/ui/screens/set_password.dart';
-import 'package:task_manager/ui/screens/sign_up_screen.dart';
+import 'package:get/get.dart';
 import 'package:task_manager/ui/screens/splash_screen.dart';
-import 'package:task_manager/ui/screens/update_profile.dart';
+import 'package:task_manager/ui/state_managers_controller/add_new_task_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/bottom_nav_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/delete_task_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/email_verification_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/get_task_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/login_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/otp_verification_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/reset_password_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/signup_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/summary_count_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/update_profile_controller.dart';
+import 'package:task_manager/ui/state_managers_controller/update_task_status_controller.dart';
 
 
-import 'ui/screens/auth/login_screen.dart';
+class TaskManagerApp extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
 
-class TaskManager extends StatefulWidget {
-  static GlobalKey<NavigatorState> globalKey= GlobalKey<NavigatorState>();
-  const TaskManager({super.key});
+  const TaskManagerApp({Key? key}) : super(key: key);
 
   @override
-  State<TaskManager> createState() => _TaskManagerState();
+  State<TaskManagerApp> createState() => _TaskManagerAppState();
 }
 
-class _TaskManagerState extends State<TaskManager> {
+class _TaskManagerAppState extends State<TaskManagerApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: TaskManager.globalKey,
+    return GetMaterialApp(
+      navigatorKey: TaskManagerApp.globalKey,
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid:false,
       title: 'Task Manager',
-      theme: ThemeData(brightness: Brightness.light,
-      primarySwatch: Colors.green,
-      inputDecorationTheme: InputDecorationTheme(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
-              // hintText: "exmaple@gmail.com",
-              border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.green,
-                  ),
-                  borderRadius: BorderRadius.circular(5)))),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode:ThemeMode.system,
-      home: const SplashScreen()
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.green,
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+        ),
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+              fontSize: 24,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.6),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.deepOrange,
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+        ),
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+              fontSize: 24,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.6),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ),
+      initialBinding: ControllerBinding(),
+      themeMode: ThemeMode.light,
+      home: const SplashScreen(),
     );
+  }
+}
+
+class ControllerBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(LoginController());
+    Get.put(OtpVerificationController());
+    Get.put(ResetPasswordController());
+    Get.put(SignupController());
+    Get.put(EmailVerificationController());
+    Get.put(AddNewTaskController());
+    Get.put(SummaryCountController());
+    Get.put(GetTasksController());
+    Get.put(DeleteTaskController());
+    Get.put(UpdateTaskStatusController());
+    Get.put(BottomNavController());
+    Get.put(UpdateProfileController());
   }
 }
