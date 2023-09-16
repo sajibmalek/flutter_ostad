@@ -1,6 +1,9 @@
+import 'package:ecom/presentation/ui/screens/auth/otp_verification_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../utility/image_assets.dart';
 
@@ -22,7 +25,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 100,
+                height: 80,
               ),
               Center(
                   child:
@@ -49,7 +52,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 height: 16,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  // what is the difference between labelText and label?
+                  //label: Text("Email"),
+                 labelText: "Email",
+                  hintText: "example@gmail.com",
                   prefixIcon: Icon(Icons.email_rounded,)
                 ),
               ),
@@ -59,7 +66,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text("Verify"))),
+                      onPressed: () {
+                        Get.to(const OtpVerificationScreen());
+                      }, child: const Text("Verify"))),
               const SizedBox(
                 height: 16,
               ),
