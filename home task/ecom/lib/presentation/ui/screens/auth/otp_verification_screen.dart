@@ -1,9 +1,14 @@
+import 'dart:async';
+
+import 'package:ecom/presentation/ui/screens/complete_profile_screen.dart';
 import 'package:ecom/presentation/ui/utility/colors_palatte.dart';
 import 'package:ecom/presentation/ui/utility/strings_assets.dart';
 import 'package:ecom/presentation/ui/widgets/otp_filed.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../utility/image_assets.dart';
@@ -17,8 +22,33 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  late Timer _timer;
+  int _start=10;
+  void OtpCountdown(){
+    const oneSec=Duration(seconds: 1);
+    _timer=Timer.periodic(oneSec, (Timer timer) {
+      if(_start==0){
+        setState(() {
+          _timer.cancel();
+        });
+      }else{
+        setState(() {
+          _start--;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    OtpCountdown();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -61,17 +91,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Verify"))),
+                        onPressed: () {
+                          Get.offAll(const CompleteProfileScreen());
+                        }, child: const Text("Verify"))),
                 const SizedBox(
                   height: 24,
                 ),
                 RichText(
-                  text: const TextSpan(
+                  text:TextSpan(
                       style: TextStyle(color: Colors.grey),
                       children: [
                         TextSpan(text: StringsAssets.expireCode),
                         TextSpan(
-                          text: StringsAssets.expireCodeTime,
+                          text:"${_start.toString()}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: AppColors.primaryColor),
@@ -81,11 +113,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 const SizedBox(
                   height: 4,
                 ),
-                TextButton(
+               _start==0? TextButton(
                   onPressed: () {},
                   child: Text("Resend"),
-                  style: TextButton.styleFrom(foregroundColor: Colors.grey),
-                )
+                  style: TextButton.styleFrom(foregroundColor: AppColors.primaryColor),
+                ):TextButton(
+                 onPressed: () {},
+                 child: Text("Resend"),
+                 style: TextButton.styleFrom(   foregroundColor: Colors.grey,),
+               )
               ],
             ),
           ),
