@@ -1,4 +1,6 @@
+import 'package:ecom/presentation/ui/screens/category_list_screen.dart';
 import 'package:ecom/presentation/ui/screens/home_screen.dart';
+import 'package:ecom/presentation/ui/screens/with_list_screen.dart';
 import 'package:ecom/presentation/ui/utility/colors_palatte.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +17,9 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final List<Widget> _screens=[
     const HomeScreen(),
+    const CategoryListScreens(),
     const HomeScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
+    const WishListScreen(),
   ];
   @override
   Widget build(BuildContext context) {

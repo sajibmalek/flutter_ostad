@@ -1,12 +1,17 @@
-import 'package:ecom/presentation/ui/utility/colors_palatte.dart';
+
+import 'package:ecom/presentation/ui/screens/category_list_screen.dart';
+import 'package:ecom/presentation/ui/screens/product_list_screen.dart';
 import 'package:ecom/presentation/ui/utility/image_assets.dart';
 import 'package:ecom/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../widgets/CategoryCard.dart';
 import '../widgets/circular_icon_button.dart';
 import '../widgets/home/home_slider.dart';
 import '../widgets/home/section_header.dart';
+import '../widgets/search_bar.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> list=[
+ static List<String> list=[
     'Electronics',
     'Food',
     'Fashion',
@@ -24,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'Cake',
     'Trees'
   ];
-  List<IconData> Icon_list = [
+  static List<IconData> Icon_list = [
     Icons.electric_bolt,
     Icons.fastfood,
     Icons.girl,
@@ -38,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white60,
+        backgroundColor: Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -74,13 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SearchBar(),
+              SearchBarTextF(),
               const SizedBox(height: 16,),
               const HomeSlider(),
               const SizedBox(height: 16,),
 
               SectionHeader(
                 onTap: (){
+                  Get.to(const CategoryListScreens());
                 },
                 title: "Categories",
               ),
@@ -98,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 onTap: (){
+                  Get.to(const ProductListScreen());
                 },
                 title: "Popular",
               ),
@@ -115,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8,),
               SectionHeader(
                 onTap: (){
+                  Get.to(const ProductListScreen());
                 },
                 title: "Special",
               ),
@@ -132,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8,),
               SectionHeader(
                 onTap: (){
+                  Get.to(const ProductListScreen());
                 },
                 title: "New",
               ),
