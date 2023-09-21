@@ -1,4 +1,5 @@
 import 'package:ecom/presentation/ui/screens/home_screen.dart';
+import 'package:ecom/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecom/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //ans: now we are using this
     // nvc ?? mvc??
 
-      Get.offAll(const HomeScreen());
+      Get.offAll(const MainBottomNavScreen());
     });
   }
   @override
