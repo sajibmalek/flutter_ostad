@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import '../../state_holders/main_bottom_nav_controller.dart';
 import '../widgets/CategoryCard.dart';
 import '../widgets/circular_icon_button.dart';
 import '../widgets/home/home_slider.dart';
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SectionHeader(
                 onTap: (){
-                  Get.to(const CategoryListScreens());
+                  Get.find<MainBottomNavController>().changeScreen(1);
                 },
                 title: "Categories",
               ),
@@ -150,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 20,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, int index) {
-                    return ProductCard();
+                    return const ProductCard();
                   },
                 ),
               ),

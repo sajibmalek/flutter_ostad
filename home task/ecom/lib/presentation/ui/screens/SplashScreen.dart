@@ -29,7 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
       //layering arct??
       //ans: now we are using this
     // nvc ?? mvc??
-
       Get.offAll(const MainBottomNavScreen());
     });
   }

@@ -1,5 +1,8 @@
+import 'package:ecom/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecom/presentation/ui/widgets/CategoryCard.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CategoryListScreens extends StatefulWidget {
   const CategoryListScreens({super.key});
@@ -38,28 +41,34 @@ List<IconData> Icon_list = [
 class _CategoryListScreensState extends State<CategoryListScreens> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text("Categories",style: TextStyle(
-          color: Colors.black
-        ),),
-        elevation: 0,
-        leading: const BackButton(
-          color: Colors.black,
+    return WillPopScope(
+      onWillPop: () async{
+        Get.find<MainBottomNavController>().backToHome();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Text("Categories",style: TextStyle(
+            color: Colors.black
+          ),),
+          elevation: 0,
+          leading: IconButton(onPressed: (){
+            Get.find<MainBottomNavController>().backToHome();
+          }, icon: const Icon(Icons.arrow_back,color: Colors.black,))
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-        child: GridView.builder(
-          itemCount: list.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16),
-            itemBuilder: (context, index) {
-              return FittedBox(child: CategoryCard(Icon_list: Icon_list[index], list: list[index]));
-            }),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: GridView.builder(
+            itemCount: list.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16),
+              itemBuilder: (context, index) {
+                return FittedBox(child: CategoryCard(Icon_list: Icon_list[index], list: list[index]));
+              }),
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:ecom/application/state_holder_binders.dart';
 import 'package:ecom/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:ecom/presentation/ui/screens/auth/otp_verification_screen.dart';
 import 'package:ecom/presentation/ui/screens/check_out_screen.dart';
@@ -19,6 +20,7 @@ class CraftyBay extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ecommerce app",
       home: const SplashScreen(),
+      initialBinding: StateHolderBinders(),
       theme: ThemeData(
           primarySwatch:
               MaterialColor(AppColors.primaryColor.value, AppColors().color),

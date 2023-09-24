@@ -16,10 +16,10 @@ class SearchBarTextF extends StatelessWidget {
           border: const OutlineInputBorder(
               borderSide: BorderSide.none
           ),
-          // focusedBorder: OutlineInputBorder( borderSide: BorderSide.none),
-          // enabledBorder: const OutlineInputBorder(
-          //     borderSide: BorderSide.none
-          // )
+          focusedBorder: OutlineInputBorder( borderSide: BorderSide.none),
+          enabledBorder: const OutlineInputBorder(
+               borderSide: BorderSide.none
+          )
       ),
     );
   }
