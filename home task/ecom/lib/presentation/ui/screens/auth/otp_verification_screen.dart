@@ -143,7 +143,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   text:TextSpan(
                       style: TextStyle(color: Colors.grey),
                       children: [
-                        TextSpan(text: 'dont get a code'),
+                        TextSpan(text: 'Don\'t  get a code'),
                         TextSpan(
                           text:"${_start.toString()}",
                           style: TextStyle(
