@@ -25,7 +25,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late Timer _timer;
-  int _start=10;
+  int _start=120;
   void OtpCountdown() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(oneSec, (Timer timer) {
@@ -88,7 +88,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 ),
                 PinCodeTextField(
                   controller: _otpTEController,
-                  length: 4,
+                  length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,11 +158,11 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 _start==0? TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(foregroundColor: AppColors.primaryColor),
-                  child: Text("Resend"),
+                  child: const Text("Resend"),
                 ):TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(   foregroundColor: Colors.grey,),
-                  child: Text("Resend"),
+                  child: const Text("Resend"),
                 )
 
               ],
