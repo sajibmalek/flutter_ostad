@@ -1,22 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CircularIconButton extends StatelessWidget {
-  const CircularIconButton({
-    super.key, required this.icon, required this.onTap,
-  });
   final IconData icon;
   final VoidCallback onTap;
+
+  const CircularIconButton({
+    Key? key,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:onTap,
-      borderRadius: BorderRadius.circular(25),
+      onTap: onTap,
       child: CircleAvatar(
-        child: Icon(icon,size: 16,),
+        radius: 16,
         backgroundColor: Colors.grey.shade300,
-        radius: 14,
+        child: Icon(
+          icon,
+          color: Colors.black45,
+          size: 18,
+        ),
       ),
     );
   }

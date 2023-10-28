@@ -1,7 +1,4 @@
-# ecom
+# crafty_bay
 
-A new Flutter project.
-
-## Project Structures
-.
-
+This is an E-Commerce project with payment gateway api implementation. Documentation will coming soon.
+Project ongoing...

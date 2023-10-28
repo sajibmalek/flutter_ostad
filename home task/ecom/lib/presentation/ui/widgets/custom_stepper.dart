@@ -1,16 +1,16 @@
-import 'package:ecom/presentation/ui/utility/colors_palatte.dart';
 import 'package:flutter/material.dart';
 
-@immutable
+import '../utility/app_colors.dart';
+
 class CustomStepper extends StatefulWidget {
-  CustomStepper({
-    super.key,
-    required this.lowerLimit,
-    required this.upperLimit,
-    required this.stepValue,
-    required this.value,
-    required this.onChange,
-  });
+  CustomStepper(
+      {Key? key,
+        required this.lowerLimit,
+        required this.upperLimit,
+        required this.stepValue,
+        required this.value,
+        required this.onChange})
+      : super(key: key);
 
   final int lowerLimit;
   final int upperLimit;
@@ -19,7 +19,9 @@ class CustomStepper extends StatefulWidget {
   final Function(int) onChange;
 
   @override
-  _CustomStepperState createState() => _CustomStepperState();
+  State<CustomStepper> createState() => _CustomStepperState();
+
+
 }
 
 class _CustomStepperState extends State<CustomStepper> {
